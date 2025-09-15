@@ -28,6 +28,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
           REPO: ${{ github.repository }}
         run: python3 .github/scripts/micro_pdca.py
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_BOT_TOKEN }}
++     - name: Debug: list workspace
++       run: |
++         echo "Workspace: $GITHUB_WORKSPACE"
++         ls -R .
++         echo "—— .github directory ——"
++         ls -R .github
 
       - name: Post status to issue (optional)
         if: success()
