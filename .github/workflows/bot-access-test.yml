@@ -1,0 +1,21 @@
+name: Test Bot Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-bot-access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with bot token
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_BOT_TOKEN }}
+
+      - name: Create a test issue via GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+        run: |
+          gh issue create \
+            --title "🤖 Bot Access Test" \
+            --body "این Issue برای اثبات دسترسی Bot ساخته شد."
